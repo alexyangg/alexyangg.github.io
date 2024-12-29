@@ -6,10 +6,14 @@
     <title>Alex's Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
-    <nav id="desktop-nav">
-      <div class="logo">Alex</div>
+    <nav id="nav-bar">
+      <a href="#" class="logo"><span>Alex</span></a>
       <div>
         <ul class="nav-links">
           <li><a href="#about">about</a></li>
@@ -17,25 +21,26 @@
           <li><a href="#projects">projects</a></li>
           <li><a href="#contact">contact</a></li>
         </ul>
+        <i class="fa-solid fa-bars" id="nav-icon"></i>
       </div>
     </nav>
 
-    <nav id="hamburger-nav">
-      <div class="logo">Alex</div>
+    <!-- <nav id="hamburger-nav">
+      <a href="#" class="logo"><span>Alex</span></a>
       <div class="hamburger-menu">
         <div class="hamburger-icon" onclick="toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <div class="menu-links">
+        <ul class="menu-links">
           <li><a href="#about" onclick="toggleMenu()">about</a></li>
           <li><a href="#experience" onclick="toggleMenu()">experience</a></li>
           <li><a href="#projects" onclick="toggleMenu()">projects</a></li>
           <li><a href="#contact" onclick="toggleMenu()">contact</a></li>
-        </div>
+        </ul>
       </div>
-    </nav>
+    </nav> -->
 
     <section id="profile">
       <div class="section__pic-container">

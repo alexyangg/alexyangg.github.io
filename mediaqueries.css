@@ -21,6 +21,9 @@
   section {
     min-height: fit-content;
   }
+  #projects {
+    margin-bottom: 3rem;
+  }
 }
 
 @media screen and (max-height: 900px) {
@@ -39,10 +42,6 @@
 }
 
 @media screen and (max-width: 1000px) {
-  /* #desktop-nav {
-    display: none;
-  } */
-
   #hamburger-nav {
     display: flex;
   }
@@ -52,7 +51,6 @@
   }
   #profile {
     padding-top: 5.2rem;
-    /* margin-top: 5rem; */
   }
   #profile,
   .section-container {
@@ -83,6 +81,16 @@
 }
 
 @media screen and (max-width: 600px) {
+  #about h1 {
+    margin-top: 4rem;
+  }
+  #experience h1 {
+    margin-top: 4rem;
+  }
+  #projects h1 {
+    margin-top: 4rem;
+  }
+
   #nav-bar #nav-icon {
     display: block;
     cursor: pointer;
@@ -96,25 +104,30 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: rgb(53, 53, 53, 0.8);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    background-color: rgb(53, 53, 53, 0.8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 1.5rem;
-    display: none;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
   }
+
   .nav-links li {
-    /* margin-top: 1rem; */
     padding: 1rem;
     justify-content: center;
   }
 
   .nav-links.open {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
+
   #nav-bar {
-    padding: 0.4rem 4rem;
-    gap: 20vw;
-    /* margin: 0.4rem 4rem; */
+    gap: 60vw;
   }
   #nav-bar .logo {
     font-size: 1.2rem;
@@ -124,23 +137,12 @@
     min-height: fit-content;
   }
 
-  /* #contact,
-  footer {
-    height: 40vh;
-  } */
   #profile {
     height: 83vh;
     margin-bottom: 0;
   }
-  #hamburger-nav {
-    margin-bottom: 4rem;
-  }
-  /* article {
-    font-size: 1rem;
-  } */
 
   .about-list-item {
-    /* margin: auto; */
     text-align: left;
     text-indent: 0;
   }

@@ -20,7 +20,7 @@ body {
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 4rem;
+  /* scroll-padding-top: 4rem; */
 }
 
 p {
@@ -228,12 +228,14 @@ a:hover {
 /* sections */
 
 section {
-  padding-top: 4vh;
+  /* padding-top: 4vh; */
   /* height: 96vh; */
   /* min-height: 100vh; */
   margin: 0 10rem;
   box-sizing: border-box;
-  min-height: fit-content;
+  /* min-height: fit-content; */
+  /* height: 100vh; */
+  min-height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
@@ -333,11 +335,11 @@ section {
 /* about section */
 
 #about {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* padding: 150px; */
   height: 70vh;
 }
 
@@ -353,8 +355,6 @@ section {
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
 .text-container {
@@ -399,13 +399,24 @@ section {
   text-indent: 1.8rem;
 }
 
+.about-list-item:last-child {
+  margin-bottom: 1rem;
+}
+
 /* projects */
 
 #projects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   /* height: 70vh; */
   /* margin: 5rem 0; */
   padding: 0 1rem;
+}
+
+#projects h1 {
+  padding-bottom: 2rem;
 }
 
 .color-container {
@@ -442,7 +453,7 @@ section {
   /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   align-items: stretch;
   /* flex-wrap: wrap; */
   /* overflow: hidden; */

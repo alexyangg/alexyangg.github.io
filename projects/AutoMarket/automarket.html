@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoMarket Demo</title>
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+  </head>
+
+  <body>
+    <script>
+      (async function () {
+        await cheerpjInit();
+        cheerpjCreateDisplay(800, 800);
+        // await cheerpjRunJar("/app/projects/AutoMarket/AutoMarket.jar");
+        await cheerpjRunJar("/app/projects/AutoMarket/Project-Starter.jar");
+        // await cheerpjRunJar("/app/projects/AutoMarket/TextDemo.jar");
+      })();
+    </script>
+  </body>
+</html>

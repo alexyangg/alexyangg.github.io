@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <base href="/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AutoMarket Demo</title>
-    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    <link rel="stylesheet" href="../projects_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
 
   <body>
-    <script>
-      (async function () {
-        await cheerpjInit();
-        cheerpjCreateDisplay(800, 800);
-        // await cheerpjRunJar("/app/projects/AutoMarket/AutoMarket.jar");
-        await cheerpjRunJar("/app/projects/AutoMarket/Project-Starter.jar");
-        // await cheerpjRunJar("/app/projects/AutoMarket/TextDemo.jar");
-      })();
-    </script>
+    <nav id="nav-bar">
+      <a href="../../index.html#" class="logo"><span>Alex</span></a>
+      <div>
+        <ul class="nav-links">
+          <li><a href="../../index.html#about">about</a></li>
+          <li><a href="../../index.html#projects">projects</a></li>
+          <li><a href="../../index.html#experience">experience</a></li>
+          <li><a href="../../index.html#contact">contact</a></li>
+        </ul>
+        <i class="fa-solid fa-bars" id="nav-icon"></i>
+      </div>
+    </nav>
+
+    <div class="video-container">
+      <video width="640" height="360" controls>
+        <source src="../../assets/AutoMarket_Demo_Vid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <script src="../../script.js"></script>
   </body>
 </html>

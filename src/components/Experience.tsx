@@ -1,23 +1,19 @@
 import { experience } from "@/content/experience";
+import ExperienceCard from "@/components/ExperienceCard";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24">
-      <h2 className="text-3xl font-bold mb-8">Experience</h2>
-      <div className="space-y-6">
-        {experience.map((e) => (
-          <div key={e.role} className="border rounded-2xl p-6">
-            <div className="flex justify-between">
-              <h3 className="font-semibold">{e.role}</h3>
-              <span className="text-sm text-neutral-500">{e.date}</span>
-            </div>
-            <p className="italic text-sm">{e.org}</p>
-            <ul className="list-disc pl-5 mt-3 space-y-1">
-              {e.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
+    <section id="experience" className="py-24 scroll-mt-28">
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+        Experience
+      </h2>
+      <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+        A quick timeline of roles and leadership experience.
+      </p>
+
+      <div className="mt-10 space-y-6">
+        {experience.map((item) => (
+          <ExperienceCard key={`${item.role}-${item.company}`} item={item} />
         ))}
       </div>
     </section>

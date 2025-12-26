@@ -1,35 +1,23 @@
+import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/content/projects";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24">
-      <h2 className="text-3xl font-bold mb-8">Projects</h2>
-      <div className="grid md:grid-cols-3 gap-6">
+    <section id="projects" className="py-24 scroll-mt-28">
+      <div className="flex items-end justify-between gap-6">
+        <div>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            Projects
+          </h2>
+          <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+            A few things I've built recently.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
         {projects.map((p) => (
-          <div
-            key={p.title}
-            className="border rounded-2xl p-6 hover:shadow-lg transition"
-          >
-            <h3 className="text-xl font-semibold">{p.title}</h3>
-            <p className="text-sm text-neutral-500 mt-2">{p.description}</p>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="text-xs px-2 py-1 bg-neutral-200 dark:bg-neutral-800 rounded"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-            <a
-              href={p.github}
-              target="_blank"
-              className="inline-block mt-4 text-sm underline"
-            >
-              GitHub →
-            </a>
-          </div>
+          <ProjectCard key={p.title} project={p} />
         ))}
       </div>
     </section>

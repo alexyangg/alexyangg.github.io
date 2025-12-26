@@ -2,17 +2,26 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
-import Contact from "@/components/Contact";
+// import Contact from "@/components/Contact";
+import Reveal from "@/components/Reveal";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main className="max-w-6xl mx-auto px-6">
-        <Hero />
-        <Projects />
-        <Experience />
-        <Contact />
+        <Reveal>
+          <Hero />
+        </Reveal>
+        <Reveal>
+          <Projects />
+        </Reveal>
+        <Reveal>
+          <Experience />
+        </Reveal>
+        {/* <Reveal>
+          <Contact />
+        </Reveal> */}
       </main>
     </>
   );

@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section id="home" className="min-h-screen pt-24 flex items-center">
+    <section
+      id="home"
+      className="min-h-[calc(100vh-4rem)] pt-20 flex items-center"
+    >
       <div className="w-full grid gap-10 md:grid-cols-[1fr_360px] items-center">
         {/* Left */}
         <div>

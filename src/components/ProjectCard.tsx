@@ -3,7 +3,7 @@ import type { Project } from "@/content/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950 shadow-sm hover:shadow-md transition">
+    <article className="group w-[360px] md:w-[420px] shrink-0 overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950 shadow-sm hover:shadow-md transition">
       <div className="relative aspect-[16/10] w-full overflow-hidden">
         <Image
           src={project.image}

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useLenis } from "@/components/LenisProvider";
 
-const NAV_OFFSET = 96; // px from top where you consider "current section"
+const NAV_OFFSET = 96; // px from top, used for determining current section
 
 const sections = [
   { id: "home", label: "Home", href: "#home" },
@@ -21,24 +21,45 @@ export default function Navbar() {
 
   useEffect(() => {
     const computeActive = () => {
-      // Special-case near top so Home is always correct
-      if (window.scrollY < 10) return "home";
+      const y = window.scrollY;
+
+      const homeEl = document.getElementById("home");
+      const projEl = document.getElementById("projects");
+      const expEl = document.getElementById("experience");
+
+      // Near top => Home
+      if (y < 10) return "home";
+
+      // Lock to Projects while projects horizontal scroll is still in progress
+      if (projEl) {
+        const start = projEl.offsetTop; // absolute doc position
+        const end = projEl.offsetTop + projEl.offsetHeight - window.innerHeight; // end of pinned scroll area
+
+        // If we're inside the projects pinned scroll range, keep it as active section
+        if (y >= start - NAV_OFFSET && y < end + NAV_OFFSET) {
+          return "projects";
+        }
+      }
+
+      // After projects finishes, normal logic: whichever section top is closest to NAV_OFFSET
+      const candidates = [
+        { id: "home", el: homeEl },
+        { id: "projects", el: projEl },
+        { id: "experience", el: expEl },
+      ].filter((c): c is { id: string; el: HTMLElement } => !!c.el);
 
       let bestId = "home";
       let bestDist = Number.POSITIVE_INFINITY;
 
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-
-        const top = el.getBoundingClientRect().top;
+      for (const c of candidates) {
+        const top = c.el.getBoundingClientRect().top;
         const dist = Math.abs(top - NAV_OFFSET);
-
         if (dist < bestDist) {
           bestDist = dist;
-          bestId = id;
+          bestId = c.id;
         }
       }
+
       return bestId;
     };
 
@@ -85,7 +106,7 @@ export default function Navbar() {
       const el = document.getElementById(id);
       if (el)
         lenis.scrollTo(el, {
-          offset: -NAV_OFFSET,
+          offset: 0,
           immediate: false,
           force: true,
         });

@@ -1,5 +1,6 @@
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
+import BackgroundFX from "@/components/BackgroundFX";
 
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
@@ -22,11 +23,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={rubik.variable}>
-      <body>
+      <body className="bg-transparent">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LenisProvider>
-            <div className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 transition-colors font-sans">
-              {children}
+            {/* stacking context root */}
+            <div className="relative min-h-screen">
+              {/* background layer */}
+              <BackgroundFX />
+
+              {/* content layer */}
+              <div className="relative z-10 min-h-screen bg-transparent text-neutral-900 dark:text-neutral-100 transition-colors">
+                {children}
+              </div>
             </div>
           </LenisProvider>
         </ThemeProvider>

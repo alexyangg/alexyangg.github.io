@@ -1,40 +1,37 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/content/projects";
 
-const NAV_OFFSET = 112;
-
 export default function Projects() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
 
   const [scrollLen, setScrollLen] = useState(0);
+  const [pinH, setPinH] = useState(0);
 
-  // total width of horizontal content
-  const totalCards = useMemo(() => projects.length, []);
-
+  // Measure horizontal distance + pin viewport height
   useEffect(() => {
     const measure = () => {
-      const section = sectionRef.current;
+      const viewport = viewportRef.current;
       const track = trackRef.current;
-      if (!section || !track) return;
+      if (!viewport || !track) return;
 
-      const viewport = track.parentElement as HTMLElement | null;
-      const viewportWidth = viewport?.clientWidth ?? window.innerWidth;
-
+      const viewportWidth = viewport.clientWidth;
       const totalWidth = track.scrollWidth;
-
       const maxTranslate = Math.max(0, totalWidth - viewportWidth);
+
       setScrollLen(maxTranslate);
+      setPinH(window.innerHeight);
     };
 
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [totalCards]);
+  }, []);
 
   useEffect(() => {
     let raf = 0;
@@ -48,25 +45,21 @@ export default function Projects() {
         const track = trackRef.current;
         if (!section || !track) return;
 
-        const rect = section.getBoundingClientRect();
-        const sectionTop = rect.top + window.scrollY;
+        // pin starts when section top hits NAV_OFFSET
+        const start = section.offsetTop;
 
-        // how far user has scrolled into this section
-        const y = window.scrollY - sectionTop;
+        // progress in px through the pinned horizontal scroll
+        const y = window.scrollY - start;
+        const clamped = Math.max(0, Math.min(scrollLen, y));
 
-        // available vertical scroll inside this section
-        const maxY = Math.max(1, section.offsetHeight - window.innerHeight);
+        // translate track
+        track.style.transform = `translate3d(${-clamped}px, 0, 0)`;
 
-        // progress 0..1
-        const t = Math.min(1, Math.max(0, y / maxY));
+        // progress bar (Ref more efficient than State)
+        const t = scrollLen ? clamped / scrollLen : 0;
         if (progressRef.current) {
           progressRef.current.style.transform = `scaleX(${t})`;
         }
-
-        // translate 0..scrollLen
-        const x = -scrollLen * t;
-
-        track.style.transform = `translate3d(${x}px, 0, 0)`;
       });
     };
 
@@ -78,52 +71,54 @@ export default function Projects() {
     };
   }, [scrollLen]);
 
-  // Section height determines how long the pin lasts.
-  // Give it enough vertical scroll space to traverse the horizontal distance.
-  // + window.innerHeight to account for sticky viewport.
-  const sectionHeightStyle = scrollLen
-    ? { height: `calc(${scrollLen}px + 100vh)` }
-    : { height: "100vh" };
+  // Section height ensures pin lasts exactly until last project is shown
+  const sectionStyle =
+    scrollLen && pinH
+      ? { height: `${Math.ceil(pinH + scrollLen)}px` }
+      : undefined;
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 scroll-mt-28"
-      style={sectionHeightStyle}
+      className="scroll-mt-28"
+      style={sectionStyle}
     >
-      {/* pinned viewport */}
-      <div className="sticky" style={{ top: NAV_OFFSET }}>
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-              Projects
-            </h2>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-300">
-              A few things I've built.
-            </p>
-          </div>
-        </div>
+      {/* Sticky pinned viewport */}
+      <div className="sticky" style={{ top: 0, height: "100vh" }}>
+        <div className="h-full">
+          <div className=" w-full h-full flex items-center">
+            <div className="w-full">
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                Projects
+              </h2>
+              <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+                A few things I've built.
+              </p>
 
-        {/* Horizontal viewport */}
-        <div className="mt-10 overflow-hidden">
-          <div
-            ref={trackRef}
-            className="flex gap-6 will-change-transform"
-            style={{ transform: "translate3d(0,0,0)" }}
-          >
-            {projects.map((p) => (
-              <ProjectCard key={p.title} project={p} />
-            ))}
+              {/* progress bar */}
+              <div className="mt-4 h-1.5 w-full rounded-full bg-neutral-200/80 dark:bg-neutral-800/70 overflow-hidden">
+                <div
+                  ref={progressRef}
+                  className="h-full origin-left rounded-full bg-neutral-900 dark:bg-white"
+                  style={{ transform: "scaleX(0)" }}
+                />
+              </div>
+
+              {/* projects */}
+              <div ref={viewportRef} className="mt-6 overflow-hidden">
+                <div
+                  ref={trackRef}
+                  className="flex gap-6 pr-24 will-change-transform"
+                  style={{ transform: "translate3d(0,0,0)" }}
+                >
+                  {projects.map((p) => (
+                    <ProjectCard key={p.title} project={p} />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        {/* horizontal scroll progress bar */}
-        <div className="mt-4 h-1.5 w-full rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
-          <div
-            ref={progressRef}
-            className="h-full origin-left rounded-full bg-neutral-900 dark:bg-white"
-            style={{ transform: "scaleX(0)" }}
-          />
         </div>
       </div>
     </section>

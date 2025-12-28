@@ -122,18 +122,15 @@ export default function BackgroundFX() {
     const update = () => {
       raf = 0;
 
-      //   const y = window.scrollY;
       const yReal = window.scrollY;
 
       // Freeze parallax during Projects pinned range by removing that scroll segment
       let y = yReal;
 
       const proj = document.getElementById("projects");
-      const NAV_OFFSET = 112;
       if (proj) {
-        const start = proj.offsetTop - NAV_OFFSET;
-        const end =
-          proj.offsetTop + proj.offsetHeight - window.innerHeight - NAV_OFFSET;
+        const start = proj.offsetTop;
+        const end = proj.offsetTop + proj.offsetHeight - window.innerHeight;
 
         if (yReal >= start && yReal <= end) {
           // inside pinned range: freeze at entry

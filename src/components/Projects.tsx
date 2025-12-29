@@ -112,6 +112,7 @@ export default function Projects() {
               <div ref={viewportRef} className="mt-6 overflow-hidden">
                 <div
                   ref={trackRef}
+                  data-track
                   className="flex gap-6 pr-24 will-change-transform"
                   style={{ transform: "translate3d(0,0,0)" }}
                 >

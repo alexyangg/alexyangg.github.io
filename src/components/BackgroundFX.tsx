@@ -116,67 +116,85 @@ export default function BackgroundFX() {
     let raf = 0;
 
     // mouse normalized [-1, 1]
-    let mx = 0;
-    let my = 0;
+    let mouseX = 0;
+    let mouseY = 0;
 
-    const update = () => {
-      raf = 0;
+    // cache to avoid extra style writes
+    let lastY = -1;
+    let lastMouseX = 999;
+    let lastMouseY = 999;
 
+    const getEffectiveY = () => {
       const yReal = window.scrollY;
-
-      // Freeze parallax during Projects pinned range by removing that scroll segment
       let y = yReal;
 
+      // Freeze parallax during Projects pinned range by removing that scroll segment
       const proj = document.getElementById("projects");
-      if (proj) {
-        const start = proj.offsetTop;
-        const end = proj.offsetTop + proj.offsetHeight - window.innerHeight;
+      const track = document.querySelector(
+        "#projects [data-track]"
+      ) as HTMLElement | null;
+
+      if (proj && track) {
+        const viewport = track.parentElement as HTMLElement | null;
+        const viewportWidth = viewport?.clientWidth ?? window.innerWidth;
+        const scrollLen = Math.max(0, track.scrollWidth - viewportWidth);
+
+        const start = proj.getBoundingClientRect().top + window.scrollY;
+        const end = start + scrollLen;
 
         if (yReal >= start && yReal <= end) {
-          // inside pinned range: freeze at entry
-          y = start;
+          y = start; // freeze
         } else if (yReal > end) {
-          // after pinned range: subtract the pinned “extra scroll” so motion resumes smoothly
-          y = yReal - (end - start);
+          y = yReal - (end - start); // resume smoothly after
         }
       }
 
-      // Scroll parallax
-      const gridY = -y * 0.08; // slow
-      const shapesY = -y * 0.56; // faster / more noticeable change
+      return y;
+    };
 
-      // Mouse parallax
-      const gridX = mx * 18;
-      const gridMY = my * 12;
+    const apply = () => {
+      const y = getEffectiveY();
 
-      const shapesX = mx * 36;
-      const shapesMY = my * 28;
+      // only update when something changed
+      if (y === lastY && mouseX === lastMouseX && mouseY === lastMouseY) return;
+      lastY = y;
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
 
-      grid.style.transform = `translate3d(${gridX}px, ${gridY + gridMY}px, 0)`;
-      shapes.style.transform = `translate3d(${shapesX}px, ${
-        shapesY + shapesMY
+      // Scroll down -> background moves up (negative)
+      const gridY = -y * 0.08;
+      const shapesY = -y * 0.16;
+
+      const gridMouseX = mouseX * 18;
+      const gridMouseY = mouseY * 12;
+
+      const shapesMouseX = mouseX * 36;
+      const shapesMouseY = mouseY * 28;
+
+      grid.style.transform = `translate3d(${gridMouseX}px, ${
+        gridY + gridMouseY
+      }px, 0)`;
+      shapes.style.transform = `translate3d(${shapesMouseX}px, ${
+        shapesY + shapesMouseY
       }px, 0)`;
     };
 
-    const schedule = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(update);
+    const loop = () => {
+      apply();
+      raf = requestAnimationFrame(loop);
     };
-
-    const onScroll = () => schedule();
 
     const onMouseMove = (e: MouseEvent) => {
-      mx = (e.clientX / window.innerWidth) * 2 - 1;
-      my = (e.clientY / window.innerHeight) * 2 - 1;
-      schedule();
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = (e.clientY / window.innerHeight) * 2 - 1;
     };
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
+    // run loop immediately so refresh scroll restoration is caught
+    raf = requestAnimationFrame(loop);
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
       if (raf) cancelAnimationFrame(raf);
     };

@@ -7,9 +7,9 @@ import { useLenis } from "@/components/LenisProvider";
 const NAV_OFFSET = 96; // px from top, used for determining current section
 
 const sections = [
-  { id: "home", label: "Home", href: "#home" },
-  { id: "projects", label: "Projects", href: "#projects" },
-  { id: "experience", label: "Experience", href: "#experience" },
+  { id: "home", label: "Home" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
 ];
 
 export default function Navbar() {
@@ -17,7 +17,6 @@ export default function Navbar() {
 
   const lenis = useLenis();
   const ids = useMemo(() => sections.map((s) => s.id), []);
-  const lastHashRef = useRef<string>("");
 
   useEffect(() => {
     const computeActive = () => {
@@ -71,17 +70,10 @@ export default function Navbar() {
         const id = computeActive();
 
         setActive((prev) => (prev === id ? prev : id));
-
-        const newHash = `#${id}`;
-        if (lastHashRef.current !== newHash) {
-          lastHashRef.current = newHash;
-          // don’t pollute back button history
-          window.history.replaceState(null, "", newHash);
-        }
       });
     };
 
-    // run once on mount (in case you load with a hash)
+    // run once on mount
     onScroll();
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -95,7 +87,6 @@ export default function Navbar() {
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    window.history.pushState(null, "", `#${id}`);
 
     // Prefer Lenis (it can interrupt an in-progress scroll)
     if (lenis) {
@@ -129,9 +120,8 @@ export default function Navbar() {
           return (
             <a
               key={s.id}
-              href={s.href}
               onClick={(e) => onClick(e, s.id)}
-              className={`px-3 py-2 text-sm rounded-full transition ${
+              className={`px-3 py-2 text-sm rounded-full select-none cursor-pointer transition ${
                 isActive
                   ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
                   : "hover:bg-neutral-100 dark:hover:bg-neutral-900"

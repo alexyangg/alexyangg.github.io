@@ -5,6 +5,7 @@ import BackgroundFX from "@/components/BackgroundFX";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
+import ScrollManager from "@/components/ScrollManager";
 
 export const metadata: Metadata = {
   title: "Alex Yang",
@@ -30,7 +31,7 @@ export default function RootLayout({
             <div className="relative min-h-screen">
               {/* background layer */}
               <BackgroundFX />
-
+              <ScrollManager />
               {/* content layer */}
               <div className="relative z-10 min-h-screen bg-transparent text-neutral-900 dark:text-neutral-100 transition-colors">
                 {children}

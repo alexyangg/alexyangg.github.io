@@ -26,6 +26,9 @@ export default function Projects() {
 
       setScrollLen(maxTranslate);
       setPinH(window.innerHeight);
+
+      // force a sync after measuring (prevents stale translate on refresh)
+      requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
     };
 
     measure();
@@ -45,8 +48,8 @@ export default function Projects() {
         const track = trackRef.current;
         if (!section || !track) return;
 
-        // pin starts when section top hits NAV_OFFSET
-        const start = section.offsetTop;
+        const rect = section.getBoundingClientRect();
+        const start = rect.top + window.scrollY;
 
         // progress in px through the pinned horizontal scroll
         const y = window.scrollY - start;

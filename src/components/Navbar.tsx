@@ -4,8 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useLenis } from "@/components/LenisProvider";
 
-const NAV_OFFSET = 96; // px from top, used for determining current section
-
 const sections = [
   { id: "home", label: "Home" },
   { id: "projects", label: "Projects" },
@@ -20,46 +18,33 @@ export default function Navbar() {
 
   useEffect(() => {
     const computeActive = () => {
-      const y = window.scrollY;
+      const anchor = window.innerHeight * 0.5;
 
-      const homeEl = document.getElementById("home");
-      const projEl = document.getElementById("projects");
-      const expEl = document.getElementById("experience");
+      // pick the LAST section whose rect contains the anchor line
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
+        if (!el) continue;
 
-      // Near top => Home
-      if (y < 10) return "home";
-
-      // Lock to Projects while projects horizontal scroll is still in progress
-      if (projEl) {
-        const start = projEl.offsetTop; // absolute doc position
-        const end = projEl.offsetTop + projEl.offsetHeight - window.innerHeight; // end of pinned scroll area
-
-        // If we're inside the projects pinned scroll range, keep it as active section
-        if (y >= start - NAV_OFFSET && y < end + NAV_OFFSET) {
-          return "projects";
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= anchor && rect.bottom > anchor) {
+          return ids[i];
         }
       }
 
-      // After projects finishes, normal logic: whichever section top is closest to NAV_OFFSET
-      const candidates = [
-        { id: "home", el: homeEl },
-        { id: "projects", el: projEl },
-        { id: "experience", el: expEl },
-      ].filter((c): c is { id: string; el: HTMLElement } => !!c.el);
-
-      let bestId = "home";
-      let bestDist = Number.POSITIVE_INFINITY;
-
-      for (const c of candidates) {
-        const top = c.el.getBoundingClientRect().top;
-        const dist = Math.abs(top - NAV_OFFSET);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestId = c.id;
+      // fallback: closest section top above anchor
+      let best = "home";
+      let bestScore = Number.NEGATIVE_INFINITY;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        const score = anchor - rect.top; // bigger = closer above
+        if (score >= 0 && score > bestScore) {
+          bestScore = score;
+          best = id;
         }
       }
-
-      return bestId;
+      return best;
     };
 
     let raf = 0;
@@ -68,7 +53,6 @@ export default function Navbar() {
       raf = requestAnimationFrame(() => {
         raf = 0;
         const id = computeActive();
-
         setActive((prev) => (prev === id ? prev : id));
       });
     };
@@ -76,14 +60,20 @@ export default function Navbar() {
     // run once on mount
     onScroll();
 
+    // run after layout settles (Projects measures on resize/mount)
+    requestAnimationFrame(onScroll);
+    setTimeout(onScroll, 0);
+    setTimeout(onScroll, 80);
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [ids]);
+  }, []);
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();

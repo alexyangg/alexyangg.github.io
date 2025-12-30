@@ -23,6 +23,9 @@ export default function Home() {
         <Reveal>
           <Contact />
         </Reveal>
+        <Reveal>
+          <Footer />
+        </Reveal>
       </main>
     </>
   );

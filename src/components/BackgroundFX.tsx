@@ -15,7 +15,8 @@ export default function BackgroundFX() {
       w: 560,
       h: 560,
       opacity: "opacity-90",
-      border: "border-neutral-300/80 dark:border-neutral-700/70",
+      // border: "border-neutral-300/80 dark:border-neutral-700/70",
+      border: "border-emerald-500/60",
       glow: true,
     },
 
@@ -36,7 +37,9 @@ export default function BackgroundFX() {
       w: 560,
       h: 560,
       opacity: "opacity-85",
-      border: "border-neutral-300/70 dark:border-neutral-700/55",
+      // border: "border-neutral-300/70 dark:border-neutral-700/55",
+      border: "border-emerald-500/60",
+      glow: true,
     },
 
     {
@@ -215,7 +218,7 @@ export default function BackgroundFX() {
       /> */}
 
       {/* Base subtle tint (static) */}
-      <div
+      {/* <div
         className="absolute inset-0 opacity-70 dark:opacity-75"
         style={{
           background:
@@ -223,6 +226,14 @@ export default function BackgroundFX() {
             "radial-gradient(1100px 700px at 85% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0) 60%)",
         }}
       />
+      <div
+        className="absolute inset-0 opacity-70 dark:opacity-75"
+        style={{
+          background:
+            "radial-gradient(900px 520px at 100% 12%, rgba(34,197,94,0.18), rgba(34,197,94,0) 62%)," +
+            "radial-gradient(1100px 700px at 85% 80%, rgba(0,0,0,0.10), rgba(0,0,0,0) 60%)",
+        }}
+      /> */}
 
       {/* Layer 1: Moving grid (slowest) */}
       <div
@@ -316,11 +327,11 @@ export default function BackgroundFX() {
         })}
 
         {/* crosshair lines */}
-        <div className="absolute left-24 top-[420px] h-[2px] w-[360px] bg-neutral-300/70 dark:bg-neutral-700/50 opacity-75" />
-        <div className="absolute left-[220px] top-72 w-[2px] h-[360px] bg-neutral-300/70 dark:bg-neutral-700/50 opacity-75" />
+        {/* <div className="absolute left-24 top-[420px] h-[2px] w-[360px] bg-neutral-300/70 dark:bg-neutral-700/50 opacity-75" /> */}
+        {/* <div className="absolute left-[220px] top-72 w-[2px] h-[360px] bg-neutral-300/70 dark:bg-neutral-700/50 opacity-75" /> */}
 
-        <div className="absolute right-24 top-[1320px] h-[2px] w-[420px] bg-neutral-300/60 dark:bg-neutral-700/45 opacity-65" />
-        <div className="absolute right-[240px] top-[1200px] w-[2px] h-[420px] bg-neutral-300/60 dark:bg-neutral-700/45 opacity-65" />
+        {/* <div className="absolute right-24 top-[1320px] h-[2px] w-[420px] bg-neutral-300/60 dark:bg-neutral-700/45 opacity-65" /> */}
+        {/* <div className="absolute right-[240px] top-[1200px] w-[2px] h-[420px] bg-neutral-300/60 dark:bg-neutral-700/45 opacity-65" /> */}
       </div>
     </div>
   );

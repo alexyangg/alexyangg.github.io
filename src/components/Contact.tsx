@@ -1,5 +1,3 @@
-"use client";
-
 const socials = [
   { label: "LinkedIn", href: "https://linkedin.com/in/alex-yang-" },
   { label: "GitHub", href: "https://github.com/alexyangg" },

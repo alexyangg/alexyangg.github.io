@@ -1,11 +1,12 @@
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import BackgroundFX from "@/components/BackgroundFX";
+import ScrollManager from "@/components/ScrollManager";
+import CustomCursor from "@/components/CustomCursor";
 
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
-import ScrollManager from "@/components/ScrollManager";
 
 export const metadata: Metadata = {
   title: "Alex Yang",
@@ -32,6 +33,7 @@ export default function RootLayout({
               {/* background layer */}
               <BackgroundFX />
               <ScrollManager />
+              <CustomCursor />
               {/* content layer */}
               <div className="relative z-10 min-h-screen bg-transparent text-neutral-900 dark:text-neutral-100 transition-colors">
                 {children}

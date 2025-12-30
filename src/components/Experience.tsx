@@ -4,7 +4,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 export default function Experience() {
   return (
     <section id="experience" className="py-24 scroll-mt-28">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+      <h2 className="text-2xl md:text-4xl font-semibold tracking-tight">
         Experience
       </h2>
       <p className="mt-2 text-neutral-600 dark:text-neutral-300">

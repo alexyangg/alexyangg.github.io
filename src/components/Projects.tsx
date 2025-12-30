@@ -92,7 +92,7 @@ export default function Projects() {
         <div className="h-full">
           <div className=" w-full h-full flex items-center">
             <div className="w-full">
-              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+              <h2 className="text-2xl md:text-4xl font-semibold tracking-tight">
                 Projects
               </h2>
               <p className="mt-2 text-neutral-600 dark:text-neutral-300">

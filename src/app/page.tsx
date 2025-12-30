@@ -2,7 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
-// import Contact from "@/components/Contact";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 
 export default function Home() {
@@ -19,9 +20,9 @@ export default function Home() {
         <Reveal>
           <Experience />
         </Reveal>
-        {/* <Reveal>
+        <Reveal>
           <Contact />
-        </Reveal> */}
+        </Reveal>
       </main>
     </>
   );

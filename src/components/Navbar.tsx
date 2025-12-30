@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useLenis } from "@/components/LenisProvider";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const sections = [
   { id: "home", label: "Home" },
@@ -78,29 +79,7 @@ export default function Navbar() {
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-
-    // Prefer Lenis (it can interrupt an in-progress scroll)
-    if (lenis) {
-      if (id === "home") {
-        lenis.scrollTo(0, { immediate: false, lock: false, force: true });
-        return;
-      }
-      const el = document.getElementById(id);
-      if (el)
-        lenis.scrollTo(el, {
-          offset: 0,
-          immediate: false,
-          force: true,
-        });
-      return;
-    }
-
-    // Fallback
-    if (id === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(id, lenis);
   };
 
   return (

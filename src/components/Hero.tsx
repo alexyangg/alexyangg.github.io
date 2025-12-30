@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import { scrollToSection } from "@/lib/scrollToSection";
+import { useLenis } from "./LenisProvider";
 
 export default function Hero() {
+  const lenis = useLenis();
+
   return (
     <section
       id="home"
@@ -18,8 +24,9 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
-            I build clean, reliable software and enjoy crafting thoughtful
-            interfaces. Here are a few projects and things I've done.
+            Building clean software and thoughtful interfaces, end to end.
+            Full-stack engineer learning distributed systems, infrastructure and
+            scalable backend systems.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -31,6 +38,10 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("contact", lenis);
+              }}
               className="rounded-full border border-neutral-200 dark:border-neutral-800 px-5 py-2.5 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-900 transition"
             >
               Contact
@@ -69,14 +80,10 @@ export default function Hero() {
             </div>
             <div className="mt-4 flex items-center justify-between">
               <div className="text-sm">
-                <div className="font-medium">Open to opportunities</div>
                 <div className="text-neutral-600 dark:text-neutral-400">
                   Full-stack • Backend • UI
                 </div>
               </div>
-              <span className="text-xs rounded-full bg-neutral-100 dark:bg-neutral-900 px-3 py-1 text-neutral-700 dark:text-neutral-200">
-                2025
-              </span>
             </div>
           </div>
         </div>

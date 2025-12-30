@@ -3,6 +3,11 @@ const socials = [
   { label: "GitHub", href: "https://github.com/alexyangg" },
 ];
 
+const resume = {
+  label: "Resume",
+  href: "/Alex_Yang_Resume.pdf",
+};
+
 export default function Contact() {
   return (
     <section id="contact" className="py-32 px-6">
@@ -92,6 +97,18 @@ export default function Contact() {
               </a>
             ))}
           </div>
+        </div>
+
+        {/* Resume */}
+        <div className="mt-6 text-center">
+          <a
+            href={resume.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 dark:text-neutral-400 underline underline-offset-4 hover:text-primary"
+          >
+            {resume.label}
+          </a>
         </div>
       </div>
     </section>

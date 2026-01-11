@@ -101,9 +101,9 @@ export default function Navbar() {
             </a>
           );
         })}
-        <div className="ml-1">
+        {/* <div className="ml-1">
           <ThemeToggle />
-        </div>
+        </div> */}
       </nav>
     </div>
   );

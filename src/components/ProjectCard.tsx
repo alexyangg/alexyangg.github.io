@@ -3,8 +3,18 @@ import type { Project } from "@/content/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group w-[360px] md:w-[420px] shrink-0 overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950 shadow-sm hover:shadow-md transition">
-      <div className="relative aspect-[16/10] w-full overflow-hidden">
+    <article
+      className="
+        group w-[360px] md:w-[420px] shrink-0 overflow-hidden
+        rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70
+        bg-white dark:bg-neutral-950 shadow-sm hover:shadow-md transition
+        grid
+        grid-rows-[220px_auto_72px_auto]
+        sm:grid-rows-[240px_auto_80px_auto]
+      "
+    >
+      {/* Image (fixed height so everything below aligns) */}
+      <div className="relative w-full overflow-hidden">
         <Image
           src={project.image}
           alt={`${project.title} preview`}
@@ -16,16 +26,19 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
-      <div className="p-6">
+      {/* Project description */}
+      <div className="px-6 pt-6">
         <h3 className="text-lg font-semibold tracking-tight">
           {project.title}
         </h3>
-
-        <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+        <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 line-clamp-3">
           {project.description}
         </p>
+      </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+      {/* Tech stack container */}
+      <div className="px-6 pt-4 overflow-hidden">
+        <div className="flex flex-wrap gap-2">
           {project.tech.map((t) => (
             <span
               key={t}
@@ -35,19 +48,21 @@ export default function ProjectCard({ project }: { project: Project }) {
             </span>
           ))}
         </div>
+      </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
-          {project.links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              target={l.href.startsWith("http") ? "_blank" : undefined}
-              className="text-sm underline underline-offset-4 opacity-80 hover:opacity-100"
-            >
-              {l.label} →
-            </a>
-          ))}
-        </div>
+      {/* Links (aligned across ProjectCards) */}
+      <div className="px-6 pb-6 pt-5 flex flex-wrap gap-3">
+        {project.links.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            target={l.href.startsWith("http") ? "_blank" : undefined}
+            rel={l.href.startsWith("http") ? "noreferrer" : undefined}
+            className="text-sm underline underline-offset-4 opacity-80 hover:opacity-100"
+          >
+            {l.label} ↗︎
+          </a>
+        ))}
       </div>
     </article>
   );

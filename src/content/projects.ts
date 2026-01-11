@@ -9,8 +9,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Komorebi",
-    // image: "/projects/komorebi.png",
-    image: "/assets/project-1.png",
+    image: "/assets/discord_bot.png",
     description:
       "A multipurpose Discord bot with 34 commands, including moderation, leveling, and an economy system.",
     tech: ["JavaScript", "Node.js", "Discord.js", "MongoDB", "Mongoose"],
@@ -24,7 +23,7 @@ export const projects: Project[] = [
   },
   {
     title: "AutoMarket",
-    image: "/projects/automarket.png",
+    image: "/assets/automarket.png",
     description:
       "A Java car marketplace app where users can browse and purchase cars with a Swing UI and tests.",
     tech: ["Java", "JUnit", "Swing"],
@@ -35,7 +34,7 @@ export const projects: Project[] = [
   },
   {
     title: "Pong",
-    image: "/projects/pong.png",
+    image: "/assets/pong.png",
     description:
       "A classic Pong clone in Java with game loop, player controls, and collision logic.",
     tech: ["Java"],

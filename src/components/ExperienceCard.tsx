@@ -34,7 +34,7 @@ export default function ExperienceCard({ item }: { item: ExperienceItem }) {
           aria-controls={regionId}
           className="w-full text-left cursor-pointer outline-none"
         >
-          <div className="relative grid gap-5 md:gap-6 md:grid-cols-[minmax(0,30%)_minmax(0,70%)] items-start">
+          <div className="relative grid gap-5 md:gap-6 md:grid-cols-[minmax(0,30%)_minmax(0,70%)] items-start pr-30">
             <div className="absolute right-0 top-0 flex items-center gap-2">
               <span className="text-xs text-neutral-500 dark:text-neutral-400 select-none">
                 {open ? "Hide" : "Click for details"}
@@ -144,10 +144,6 @@ export default function ExperienceCard({ item }: { item: ExperienceItem }) {
                   </div>
                 </div>
               </div>
-
-              <p className="mt-4 text-xs text-neutral-500 dark:text-neutral-400">
-                {open ? "Click to collapse" : "Click to expand"}
-              </p>
             </div>
 
             {/* Right side: summary/impact points */}

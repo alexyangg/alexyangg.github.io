@@ -2,11 +2,22 @@
 
 import { useEffect, useRef } from "react";
 
+type Shape = {
+  cls: string;
+  x: number | string;
+  y: number | string;
+  w: number;
+  h: number;
+  opacity: string;
+  border: string;
+  glow?: boolean;
+};
+
 export default function BackgroundFX() {
   const gridRef = useRef<HTMLDivElement | null>(null);
   const shapesRef = useRef<HTMLDivElement | null>(null);
 
-  const SHAPES = [
+  const SHAPES: Shape[] = [
     // Top area
     {
       cls: "rounded-full border-2",

@@ -73,7 +73,7 @@ export default function ExperienceCard({ item }: { item: ExperienceItem }) {
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   aria-label={`Open ${item.company} website`}
-                  className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950"
+                  className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950"
                 >
                   {item.logoSrc ? (
                     <Image

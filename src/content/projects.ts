@@ -40,7 +40,7 @@ export const projects: Project[] = [
     tech: ["Java"],
     links: [
       { label: "GitHub", href: "https://github.com/alexyangg/Pong" },
-      { label: "Video demo", href: "/projects/Pong/pong.html" },
+      { label: "Video demo", href: "/pong" },
     ],
   },
 ];

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* critical: never block clicks */
+  z-index: 9999;
+  transform: translate3d(-9999px, -9999px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* small dot that stays tight to pointer */
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  margin-left: -3px; /* center */
+  margin-top: -3px;
+  background: currentColor;
+  color: rgba(255, 255, 255, 0.9);
+  mix-blend-mode: difference;
+}
+
+/* ring follows with easing */
+.custom-cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  margin-left: -17px;
+  margin-top: -17px;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  mix-blend-mode: difference;
+  transition: transform 120ms ease, width 160ms ease, height 160ms ease;
+}
+
+/* pointer hover: slightly bigger + stronger */
+.custom-cursor-ring[data-pointer="true"] {
+  width: 42px;
+  height: 42px;
+  margin-left: -21px;
+  margin-top: -21px;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* text hover: get out of the way */
+.custom-cursor-ring[data-text="true"],
+.custom-cursor-dot[data-text="true"] {
+  opacity: 0;
+}
+
+/* click feedback */
+.custom-cursor-ring[data-down="true"] {
+  transform: translate3d(var(--x, 0), var(--y, 0), 0) scale(0.92);
+}

@@ -16,7 +16,7 @@ export const projects: Project[] = [
     links: [
       { label: "GitHub", href: "https://github.com/alexyangg/discord_bot" },
       {
-        label: "Invite",
+        label: "View on Discord",
         href: "https://discord.com/application-directory/859496216256970762",
       },
     ],
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     tech: ["Java", "JUnit", "Swing"],
     links: [
       { label: "GitHub", href: "https://github.com/alexyangg/AutoMarket" },
-      { label: "Video demo", href: "/projects/AutoMarket/automarket.html" },
+      { label: "Video demo", href: "/automarket" },
     ],
   },
   {

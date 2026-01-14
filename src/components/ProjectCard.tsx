@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "@/content/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -53,15 +54,15 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* Links (aligned across ProjectCards) */}
       <div className="px-6 pb-6 pt-5 flex flex-wrap gap-3">
         {project.links.map((l) => (
-          <a
+          <Link
             key={l.href}
             href={l.href}
             target={l.href.startsWith("http") ? "_blank" : undefined}
-            rel={l.href.startsWith("http") ? "noreferrer" : undefined}
+            rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className="text-sm underline underline-offset-4 opacity-80 hover:opacity-100"
           >
             {l.label} ↗︎
-          </a>
+          </Link>
         ))}
       </div>
     </article>

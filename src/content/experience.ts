@@ -18,7 +18,7 @@ export const experience: ExperienceItem[] = [
     date: "Jan 2026 – Apr 2026",
     location: "Toronto, ON",
     companyUrl: "https://www.shopify.com",
-    // logoSrc: "/assets/logos/shopify.svg",
+    logoSrc: "/assets/company_logos/shopify_logo.jpg",
     logoAlt: "Shopify logo",
     summary:
       "Incoming full-stack engineering intern on Shopify's Website Platform team, building core services used by millions of merchants.",
@@ -34,7 +34,7 @@ export const experience: ExperienceItem[] = [
     date: "Sept 2025 – Dec 2025",
     location: "Surrey, BC",
     companyUrl: "https://www.safe.com",
-    // logoSrc: "/assets/logos/safe-software.svg",
+    logoSrc: "/assets/company_logos/safesoftware_logo.jpg",
     logoAlt: "Safe Software logo",
     summary:
       "Built and optimized internal security tooling to detect third-party dependency vulnerabilities and automate security workflows.",
@@ -52,7 +52,7 @@ export const experience: ExperienceItem[] = [
     date: "Feb 2025 – Mar 2025",
     location: "Remote",
     companyUrl: "https://cadabble.com",
-    // logoSrc: "/assets/logos/cadabble.svg",
+    logoSrc: "/assets/company_logos/cadabble_logo.jpg",
     logoAlt: "Cadabble logo",
     summary:
       "Worked on full-stack features to support real-time service submissions and improve performance across the web platform.",

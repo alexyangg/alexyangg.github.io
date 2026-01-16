@@ -45,7 +45,7 @@ export const projects: Project[] = [
   },
   {
     title: "Komorebi",
-    image: "/assets/discord_bot.png",
+    image: "/assets/project_images/discord_bot.png",
     description:
       "A multipurpose Discord bot with 34 commands, including moderation, leveling, and an economy system.",
     tech: ["JavaScript", "Node.js", "Discord.js", "MongoDB", "Mongoose"],
@@ -59,7 +59,7 @@ export const projects: Project[] = [
   },
   {
     title: "AutoMarket",
-    image: "/assets/automarket.png",
+    image: "/assets/project_images/automarket.png",
     description:
       "A Java car marketplace app where users can browse and purchase cars with a Swing UI and tests.",
     tech: ["Java", "JUnit", "Swing"],

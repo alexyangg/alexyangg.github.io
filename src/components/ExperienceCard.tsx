@@ -117,20 +117,7 @@ export default function ExperienceCard({ item }: { item: ExperienceItem }) {
                 </h3>
 
                 <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300 truncate">
-                  {item.companyUrl ? (
-                    <a
-                      href={item.companyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="underline underline-offset-4 decoration-neutral-300/70 dark:decoration-neutral-700/70 hover:decoration-neutral-500 dark:hover:decoration-neutral-400"
-                      aria-label={`Open ${item.company} website`}
-                    >
-                      {item.company}
-                    </a>
-                  ) : (
-                    item.company
-                  )}
+                  {item.company}
                 </p>
 
                 {/* Date/location  */}

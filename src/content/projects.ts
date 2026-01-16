@@ -8,6 +8,42 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "WasteNot",
+    image: "/assets/project_images/wastenot.png",
+    description:
+      "A smart web app that generates recipes from leftover ingredients in your pantry to reduce food waste. Top 10 (of 81) project for the TELUS Sponsor Prize at nwHacks 2025.",
+    tech: [
+      "Node.js",
+      "Express.js",
+      "React",
+      "MongoDB",
+      "Spoonacular API",
+      "Google Maps API",
+      "JWT",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/alexyangg/nwhacks2025" },
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/wastenot-gomst0",
+      },
+    ],
+  },
+  {
+    title: "ExpressMart",
+    image: "/assets/project_images/expressmart.png",
+    description:
+      "A full-stack web application designed for a product marketplace, allowing users to create and sell their products.",
+    tech: ["Node.js", "Express.js", "React", "MongoDB"],
+    links: [
+      { label: "GitHub", href: "https://github.com/alexyangg/express-mart" },
+      {
+        label: "Website",
+        href: "https://expressmart.onrender.com/",
+      },
+    ],
+  },
+  {
     title: "Komorebi",
     image: "/assets/discord_bot.png",
     description:

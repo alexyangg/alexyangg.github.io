@@ -8,6 +8,30 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Patient Management System",
+    image: "/assets/project_images/patient_management.png",
+    description:
+      "A production-style backend system built with microservices to manage patients, billing, authentication, and analytics using REST, gRPC, and Kafka message streaming.",
+    tech: [
+      "Java",
+      "Spring Boot",
+      // "Spring Cloud Gateway",
+      "gRPC",
+      "Kafka",
+      "PostgreSQL",
+      "Docker",
+      "AWS (ECS, RDS, MSK, CloudFormation)",
+      // "LocalStack",
+      // "CloudFormation",
+    ],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/alexyangg/patient-management",
+      },
+    ],
+  },
+  {
     title: "WasteNot",
     image: "/assets/project_images/wastenot.png",
     description:

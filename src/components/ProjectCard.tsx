@@ -15,16 +15,14 @@ export default function ProjectCard({ project }: { project: Project }) {
       "
     >
       {/* Image (fixed height so everything below aligns) */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         <Image
           src={project.image}
           alt={`${project.title} preview`}
           fill
-          className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          className="object-contain group-hover:scale-[1.20] transition-transform duration-300"
           sizes="(max-width: 768px) 100vw, 50vw"
-          priority={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
       {/* Project description */}

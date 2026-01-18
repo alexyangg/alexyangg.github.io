@@ -91,7 +91,7 @@ export default function Hero() {
 
         {/* Right (avatar card) */}
         <div className="flex justify-center md:justify-end">
-          <div className="rounded-full border border-neutral-200/70 dark:border-neutral-800/70 bg-white/60 dark:bg-neutral-950/60 backdrop-blur p-4 shadow-sm">
+          <div className="rounded-full border border-neutral-200/70 dark:border-neutral-800/70 bg-white/60 dark:bg-neutral-950/60 backdrop-blur shadow-sm">
             <div className="relative h-[320px] w-[320px] overflow-hidden rounded-full">
               <Image
                 src="/assets/profile-pic.png"

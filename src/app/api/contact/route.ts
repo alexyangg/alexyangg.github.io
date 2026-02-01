@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { contactRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -24,6 +25,23 @@ export async function POST(req: Request) {
     // Honeypot triggered => pretend success
     if (company) {
       return Response.json({ ok: true });
+    }
+
+    const ip =
+      req.headers.get("x-forwarded-for") ??
+      req.headers.get("x-real-ip") ??
+      "unknown";
+
+    const { success } = await contactRateLimit.limit(`contact:${ip}`);
+
+    if (!success) {
+      return Response.json(
+        {
+          ok: false,
+          error: "Too many messages sent. Please try again later.",
+        },
+        { status: 429 }
+      );
     }
 
     if (!email || !message) {

@@ -7,6 +7,7 @@ import CustomCursor from "@/components/CustomCursor";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Alex Yang",
@@ -41,6 +42,7 @@ export default function RootLayout({
             </div>
           </LenisProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

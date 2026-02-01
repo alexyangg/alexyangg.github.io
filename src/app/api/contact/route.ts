@@ -19,6 +19,12 @@ export async function POST(req: Request) {
     const name = String(body.name ?? "").trim();
     const email = String(body.email ?? "").trim();
     const message = String(body.message ?? "").trim();
+    const company = String(body.company ?? "").trim();
+
+    // Honeypot triggered => pretend success
+    if (company) {
+      return Response.json({ ok: true });
+    }
 
     if (!email || !message) {
       return Response.json(

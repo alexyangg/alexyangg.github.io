@@ -30,6 +30,7 @@ export default function Contact() {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
       message: String(formData.get("message") ?? ""),
+      company: String(formData.get("company") ?? ""), // honeypot
     };
 
     try {
@@ -67,6 +68,18 @@ export default function Contact() {
       {/* Card */}
       <div className="mx-auto max-w-xl rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950 p-6 shadow-sm">
         <form onSubmit={onSubmit} className="space-y-4">
+          {/* Honeypot: bots often fill this, humans won't */}
+          <div className="hidden" aria-hidden="true">
+            <label>
+              Company
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </label>
+          </div>
           <input
             type="text"
             name="name"

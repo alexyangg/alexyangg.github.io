@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const socials = [
   { label: "LinkedIn", href: "https://linkedin.com/in/alex-yang-" },
   { label: "GitHub", href: "https://github.com/alexyangg" },
@@ -9,6 +13,48 @@ const resume = {
 };
 
 export default function Contact() {
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      message: String(formData.get("message") ?? ""),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMsg(data?.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  }
+
   return (
     <section id="contact" className="py-32 px-6">
       <div className="max-w-3xl mx-auto text-center mb-8">
@@ -20,12 +66,7 @@ export default function Contact() {
 
       {/* Card */}
       <div className="mx-auto max-w-xl rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-950 p-6 shadow-sm">
-        <form
-          action="mailto:alexemail67@gmail.com"
-          method="post"
-          encType="text/plain"
-          className="space-y-4"
-        >
+        <form onSubmit={onSubmit} className="space-y-4">
           <input
             type="text"
             name="name"
@@ -72,10 +113,28 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="cursor-pointer w-full rounded-full bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
+            disabled={status === "sending"}
+            className="
+              cursor-pointer w-full rounded-full
+              bg-neutral-900 text-white
+              dark:bg-white dark:text-neutral-900
+              px-5 py-2.5 text-sm font-medium
+              hover:opacity-90 transition
+              disabled:opacity-60 disabled:cursor-not-allowed
+            "
           >
-            Send message
+            {status === "sending" ? "Sending..." : "Send message"}
           </button>
+
+          {/* Status message */}
+          {status === "success" && (
+            <p className="text-sm text-green-600 dark:text-green-400">
+              Message sent! I’ll get back to you soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>
+          )}
         </form>
 
         {/* Socials */}

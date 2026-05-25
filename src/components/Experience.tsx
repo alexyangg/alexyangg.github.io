@@ -8,7 +8,7 @@ export default function Experience() {
         Experience
       </h2>
       <p className="mt-2 text-neutral-600 dark:text-neutral-300">
-        A quick timeline of roles and leadership experience.
+        A timeline of my software engineering experience.
       </p>
 
       <div className="mt-10 space-y-6">

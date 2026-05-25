@@ -14,6 +14,22 @@ export type ExperienceItem = {
 export const experience: ExperienceItem[] = [
   {
     role: "Software Engineer Intern",
+    company: "Tesla",
+    date: "May 2026 – Aug 2026",
+    location: "Palo Alto, CA",
+    companyUrl: "https://tesla.com",
+    logoSrc: "/assets/company_logos/tesla_logo.png",
+    logoAlt: "Tesla logo",
+    summary:
+      "Distributed systems engineer on Tesla’s Energy team, working with Scala and Akka to build real-time cloud platforms for monitoring and controlling millions of energy devices",
+    impactPoints: [
+      "Build Scala/Akka services that support real-time monitoring, control, and coordination of Tesla Energy products across Powerwall, Megapack, Supercharger, and Virtual Power Plant deployments",
+      "Develop backend platform features for cloud systems that process device telemetry, operational events, and control commands from large-scale distributed energy assets",
+      "Improve reliability and scalability of services responsible for managing millions of IoT-connected energy devices across residential, commercial, and grid-scale deployments",
+    ],
+  },
+  {
+    role: "Software Engineer Intern",
     company: "Shopify",
     date: "Jan 2026 – Apr 2026",
     location: "Toronto, ON",

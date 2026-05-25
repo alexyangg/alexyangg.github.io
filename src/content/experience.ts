@@ -21,11 +21,12 @@ export const experience: ExperienceItem[] = [
     logoSrc: "/assets/company_logos/shopify_logo.jpg",
     logoAlt: "Shopify logo",
     summary:
-      "Incoming full-stack engineering intern on Shopify's Website Platform team, building core services used by millions of merchants.",
+      "Modernized Shopify’s Privacy Portal with an edge-rendered TypeScript architecture on Cloudflare Workers, improving scalability, localization, backend integration, and abuse protection for 130M+ monthly visitors.",
     impactPoints: [
-      "Incoming full-stack intern on the Website Platform team, contributing to high-traffic merchant-facing services",
-      "Working with Ruby on Rails, React, and GraphQL to develop and maintain core platform functionality",
-      "Collaborating with engineers across frontend and backend to ship reliable, scalable features",
+      "Led the migration of Shopify's Privacy Portal from a standalone Ruby on Rails app to an edge-rendered React app on Cloudflare Workers, reducing origin coupling for over 130M unique visitors monthly.",
+      "Implemented 14 privacy request flows using TypeScript forms with server-validated contracts and client-side Global Privacy Control (GPC) detection, ensuring reliable request processing across 21 locales.",
+      "Owned cross-repository backend integration by building GraphQL queries, mutations, and schema changes that enabled server-to-server communication, resolved locale mismatches, and reduced client-side CORS/CSRF risk.",
+      "Strengthened high-abuse request endpoints by integrating hCaptcha and rate-limiting rules to mitigate bot-driven spam, maintaining 99.9% availability and protecting service reliability during traffic spikes.",
     ],
   },
   {

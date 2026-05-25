@@ -132,7 +132,7 @@ export default function ExperienceCard({ item }: { item: ExperienceItem }) {
           </div>
 
           {/* Right side: summary/impact points */}
-          <div id={regionId} className="min-w-0 pt-[2px]">
+          <div id={regionId} className="min-w-0 px-[8px]">
             {/* Smoothly animated swap: height + opacity so the card doesn’t snap */}
             <AnimatePresence initial={false} mode="sync">
               {!open ? (
